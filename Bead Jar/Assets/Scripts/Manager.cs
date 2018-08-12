@@ -10,7 +10,16 @@ public class Manager : MonoBehaviour
 	// TMP serialize
 	[SerializeField]private float _remainingTime;
 
-	[SerializeField] private Text _timeDisplay;
+	
+	private bool _countTime=false;
+	private bool _inGame = true;
+	
+	// TMP serialize
+	[SerializeField] private float _resource=0;
+
+	// TMP serialize
+	[SerializeField] private float _score=0;
+	
 	public float RemainingTime
 	{
 		get { return this._remainingTime; }
@@ -21,16 +30,47 @@ public class Manager : MonoBehaviour
 	{
 		if (Instance == null) Instance = this;
 	}
-	
-	// CLEAN use switch and Time.time
-	public void UpdateTime(float change)
+
+	void Update()
 	{
-		_remainingTime += change;
-		FlushTime();
+		if (_countTime)
+		{
+			_remainingTime -= Time.deltaTime;
+			UpdateTime();
+			_resource += Backpack.Instance.GetTotalResourceMul() * Time.deltaTime;
+			UpdateResource();
+			_score += Backpack.Instance.GetTotalContentmentMul() + Time.deltaTime;
+			UpdateScore();
+			if (_remainingTime <= 0)
+			{
+				EndGame();
+			}
+		}
+	}
+	
+	public void SetCountTime(bool newCT)
+	{
+		_countTime = newCT;
 	}
 
-	private void FlushTime()
+	private void UpdateTime()
 	{
-		_timeDisplay.text = string.Format("{0:F1}",_remainingTime);
+		CanvasManager.Instance.SetTime(_remainingTime);
+	}
+
+	private void UpdateResource()
+	{
+		CanvasManager.Instance.SetResource(_resource);
+	}
+	
+	private void UpdateScore()
+	{
+		CanvasManager.Instance.SetScore(_score);
+	}
+
+	public void EndGame()
+	{
+		CharacterGroup.Instance.SetControllable(false);
+		CanvasManager.Instance.ShowEndGame();
 	}
 }

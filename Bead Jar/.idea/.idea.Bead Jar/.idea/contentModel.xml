@@ -15,10 +15,13 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="Backpack.cs" t="Include" />
+          <e p="CanvasManager.cs" t="Include" />
           <e p="Character.cs" t="Include" />
           <e p="CharacterGroup.cs" t="Include" />
           <e p="Item.cs" t="Include" />
+          <e p="ItemSlot.cs" t="Include" />
           <e p="Manager.cs" t="Include" />
+          <e p="Test.cs" t="Include" />
         </e>
       </e>
       <e p="Bead Jar.sln" t="IncludeFlat" />
