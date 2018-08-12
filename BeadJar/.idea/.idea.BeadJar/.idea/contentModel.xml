@@ -23,6 +23,7 @@
           <e p="Manager.cs" t="Include" />
           <e p="Parent.cs" t="Include" />
           <e p="Prestige.cs" t="Include" />
+          <e p="Someone.cs" t="Include" />
           <e p="Test.cs" t="Include" />
         </e>
       </e>

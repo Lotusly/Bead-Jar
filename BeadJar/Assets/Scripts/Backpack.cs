@@ -16,7 +16,7 @@ public class Backpack : MonoBehaviour
 	}
 	// TMP serialize
 	[SerializeField] private float _burden = 0;
-	//[SerializeField]private List<Item> _highlightedItems;
+	[SerializeField]private List<Item> _highlightedItems;
 	// TMP serialize
 	[SerializeField] private List<Item> _carriedItems;
 	
@@ -32,26 +32,30 @@ public class Backpack : MonoBehaviour
 	void Awake()
 	{
 		if (Instance == null) Instance = this;
-		//_highlightedItems = new List<Item>();
+		_highlightedItems = new List<Item>();
 		_carriedItems = new List<Item>();
 	}
 
-	/*public void AddHighlightedItem(Item highlighted)
+	public void AddHighlightedItem(Item highlighted)
 	{
 		_highlightedItems.Add(highlighted);
 	}
 	public void RemoveHighlightedItem(Item highlighted)
 	{
 		_highlightedItems.Remove(highlighted);
-	}*/
+	}
 
-	/*public void GrabHighlightedItem()
+	public void SwitchHighlightedItem()
 	{
 		if (_highlightedItems.Count > 0)
 		{
-			GrabItem(_highlightedItems[0]);
+			if (_highlightedItems[0].carried)
+			{
+				_highlightedItems[0].theSlot.OnPointerDown();
+			}
+			else TryGrabItem(_highlightedItems[0]);
 		}
-	}*/
+	}
 
 	public void TryGrabItem(Item theItem)
 	{

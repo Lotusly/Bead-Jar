@@ -1,6 +1,7 @@
 ﻿ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using UnityEngine;
+ using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Manager : MonoBehaviour
 
 	private bool _countTime = false;
 	private bool _fixResource = false;
+	private bool _gameOver = false;
 
 	public bool CountTime
 	{
@@ -119,12 +121,12 @@ public class Manager : MonoBehaviour
 		_fixResource = newFR;
 		if (newFR)
 		{
-			CanvasManager.Instance.SetScore(-1);
+			CanvasManager.Instance.SetResource(-1);
 		}
 		else
 		{
-			_resource = 10;
-			CanvasManager.Instance.SetScore(_resource);
+			_resource = Mathf.Min(10,_resource);
+			CanvasManager.Instance.SetResource(_resource);
 		}
 	}
 
@@ -148,10 +150,10 @@ public class Manager : MonoBehaviour
 		CanvasManager.Instance.SetScore(_score);
 	}
 
-	private void GetAchievement(int index)
+	public void GetAchievement(int index)
 	{
 		_achievements[index] = true;
-		CanvasManager.Instance.ShowAchievement(0);
+		CanvasManager.Instance.ShowAchievement(index);
 	}
 
 	public void EndGame()
@@ -162,8 +164,13 @@ public class Manager : MonoBehaviour
 		if (_score > previousHighScore)
 		{
 			SaveHighScore();
-			print("new high score: "+_score);
 		}
+		CanvasManager.Instance.SetSystemMessage("History High Score: " + previousHighScore);
+		_gameOver = true;
+	}
 
+	public void OnSpaceDown()
+	{
+		if(_gameOver) SceneManager.LoadScene("Main");
 	}
 }

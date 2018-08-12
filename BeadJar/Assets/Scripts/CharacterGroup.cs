@@ -5,9 +5,9 @@ using UnityEngine;
 public class CharacterGroup : MonoBehaviour
 {
 	public static CharacterGroup Instance;
-	public float _speed;
+	[SerializeField]private float _speed = 1.5f;
 
-	public Vector3 _speedVector;
+	private Vector3 _speedVector;
 
 	private bool _controllable = true;
 	// Use this for initialization
@@ -19,8 +19,6 @@ public class CharacterGroup : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		_speed = calSpeed(Backpack.Instance.Burden / Backpack.Instance.Volume);
-
 		if (_controllable)
 		{
 			if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W))
@@ -37,10 +35,11 @@ public class CharacterGroup : MonoBehaviour
 				_speedVector = Vector3.zero;
 				Manager.Instance.SetCountTime(false);
 			}
-			/*if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				Backpack.Instance.GrabHighlightedItem();
-			}*/
+				Backpack.Instance.SwitchHighlightedItem();
+				Manager.Instance.OnSpaceDown();
+			}
 		}
 
 	}

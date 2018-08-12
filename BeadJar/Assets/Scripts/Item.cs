@@ -29,7 +29,7 @@ public class Item : MonoBehaviour
 	[SerializeField] protected AnimationCurve _burden;
 	[SerializeField] protected AnimationCurve _treasure;
 	
-	protected bool carried = false;
+	public bool carried = false;
 	public ItemSlot theSlot;
 	// Use this for initialization
 	void Awake ()
@@ -57,13 +57,13 @@ public class Item : MonoBehaviour
 	private void OnMouseEnter()
 	{
 		_mat.color = _oriColor * _colorMulti;
-		//Backpack.Instance.AddHighlightedItem(this);
+		Backpack.Instance.AddHighlightedItem(this);
 	}
 
 	private void OnMouseExit()
 	{
 		_mat.color = _oriColor;
-		//Backpack.Instance.RemoveHighlightedItem(this);
+		Backpack.Instance.RemoveHighlightedItem(this);
 	}
 
 	private void OnMouseDown()
@@ -71,7 +71,7 @@ public class Item : MonoBehaviour
 		Backpack.Instance.TryGrabItem(this);
 	}
 
-	public void BeGrabbed()
+	public virtual void BeGrabbed()
 	{
 		GetComponent<Renderer>().enabled = false;
 		GetComponent<Collider>().enabled = false;
@@ -79,7 +79,7 @@ public class Item : MonoBehaviour
 		//Destroy(this);
 	}
 
-	public void BeDropped()
+	public virtual void BeDropped()
 	{
 		transform.position = CharacterGroup.Instance.transform.position;
 		GetComponent<Renderer>().enabled = true;

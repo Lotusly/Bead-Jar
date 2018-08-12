@@ -26,12 +26,14 @@ public class ItemSlot : MonoBehaviour
 	{
 		_text.color = Color.black;
 		_text.fontStyle = FontStyle.Bold;
+		Backpack.Instance.AddHighlightedItem(theItem);
 	}
 
 	public void OnPointerExit()
 	{
 		_text.color = Color.white;
 		_text.fontStyle = FontStyle.Normal;
+		Backpack.Instance.RemoveHighlightedItem(theItem);
 	}
 
 	public void OnPointerDown()

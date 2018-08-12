@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Prestige : Item {
 
-	public void BeGrabbed()
+	public override void BeGrabbed()
 	{
 		GetComponent<Renderer>().enabled = false;
 		GetComponent<Collider>().enabled = false;
@@ -12,7 +12,7 @@ public class Prestige : Item {
 		Manager.Instance.SetFixResource(true);
 	}
 
-	public void BeDropped()
+	public override void BeDropped()
 	{
 		transform.position = CharacterGroup.Instance.transform.position;
 		GetComponent<Renderer>().enabled = true;
