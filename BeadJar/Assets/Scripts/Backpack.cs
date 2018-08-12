@@ -57,9 +57,10 @@ public class Backpack : MonoBehaviour
 	{
 		if (Vector2.Distance(new Vector2(theItem.transform.position.x, theItem.transform.position.z),
 			    new Vector2(CharacterGroup.Instance.transform.position.x, CharacterGroup.Instance.transform.position.z)) >
-		    theItem.transform.lossyScale.x + 0.5)
+		    theItem.transform.lossyScale.x/2 + 0.5)
 		{
 			CanvasManager.Instance.SetSystemMessage("Too far away to grab.");
+			return;
 		}
 		if (_volume > _burden + theItem.Weight)
 		{

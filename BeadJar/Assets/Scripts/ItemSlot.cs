@@ -19,7 +19,7 @@ public class ItemSlot : MonoBehaviour
 	{
 		_text.text = theItem.name + "\t\t\t" + string.Format("{0:F2}",theItem.Weight)+
 		             "\n"+string.Format("{0:F2}",resourceMul)+
-		             "\t\t\t"+string.Format("{0:F2}",contentmentMul);
+		             "\t\t\t\t"+string.Format("{0:F2}",contentmentMul);
 	}
 
 	public void OnPointerEnter()

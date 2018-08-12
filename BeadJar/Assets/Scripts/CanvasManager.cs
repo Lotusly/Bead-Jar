@@ -12,6 +12,7 @@ public class CanvasManager : MonoBehaviour
 	public Text ResourceDisplay;
 	public Text ScoreDisplay;
 	public Text SystemMessage;
+	public Image[] Achievements;
 	private Coroutine _runningCoroutine;
 	
 	public Text EndGameDisplay;
@@ -39,7 +40,7 @@ public class CanvasManager : MonoBehaviour
 	{
 		GameObject newSlotObject = Instantiate(SlotPrefab,transform);
 		newSlotObject.GetComponent<RectTransform>().anchoredPosition =
-			HeadLine.anchoredPosition + SlotInterval;
+			HeadLine.anchoredPosition + SlotInterval * (_slots.Count+1);
 		ItemSlot newSlot = newSlotObject.GetComponent<ItemSlot>();
 		newSlot.theItem = theItem;
 		theItem.theSlot = newSlot;
@@ -52,6 +53,7 @@ public class CanvasManager : MonoBehaviour
 		_slots.Remove(theSlot);
 		PlaceSlots();
 	}
+	
 
 	private void PlaceSlots()
 	{
@@ -62,6 +64,11 @@ public class CanvasManager : MonoBehaviour
 		}
 	}
 
+	public void ShowAchievement(int index)
+	{
+		Achievements[index].enabled = true;
+	}
+
 	public void SetTime(float newTime)
 	{
 		TimeDisplay.text = "Time: "+string.Format("{0:F2}",newTime);
@@ -69,7 +76,8 @@ public class CanvasManager : MonoBehaviour
 
 	public void SetResource(float newResource)
 	{
-		ResourceDisplay.text = "Resource: "+string.Format("{0:F2}",newResource);
+		if(newResource<0)ResourceDisplay.text = "Resource: N/A";
+		else ResourceDisplay.text = "Resource: "+string.Format("{0:F2}",newResource);
 	}
 
 	public void SetScore(float newScore)

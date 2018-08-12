@@ -5,31 +5,31 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
 
-	private Material _mat;
-	private Color _oriColor;
+	protected Material _mat;
+	protected Color _oriColor;
 
-	[SerializeField] private float _colorMulti;
+	[SerializeField] protected float _colorMulti;
 
 	
-	private const float Value_Resource = 1;
-	private const float Value_Contentment = 0;
-	private const float Burden_Resource = -1;
-	private const float Burden_Contentment = -0.5f;
-	private const float Treasure_Resource = 0;
-	private const float Treasure_Contentment = 1;
+	protected const float Value_Resource = 1;
+	protected const float Value_Contentment = 0;
+	protected const float Burden_Resource = 0.1f;
+	protected const float Burden_Contentment = -0.3f;
+	protected const float Treasure_Resource = 0;
+	protected const float Treasure_Contentment = 1;
 	
 
-	private float _timePoint=0;
+	protected float _timePoint=0;
 
 
 
 	public float Weight;
 	//[SerializeField] private float _lifeLength;
-	[SerializeField] private AnimationCurve _value;
-	[SerializeField] private AnimationCurve _burden;
-	[SerializeField] private AnimationCurve _treasure;
+	[SerializeField] protected AnimationCurve _value;
+	[SerializeField] protected AnimationCurve _burden;
+	[SerializeField] protected AnimationCurve _treasure;
 	
-	private bool carried = false;
+	protected bool carried = false;
 	public ItemSlot theSlot;
 	// Use this for initialization
 	void Awake ()
@@ -38,7 +38,7 @@ public class Item : MonoBehaviour
 		_oriColor = _mat.color;
 		if (Weight <= 0)
 		{
-			Debug.LogError("Item.Awake()-"+name+"- Weight = "+Weight.ToString());
+			Debug.LogError("Item.Awake()-"+name+"- Weight = "+Weight);
 			Destroy(gameObject);
 		}
 	}
